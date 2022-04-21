@@ -1,32 +1,26 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { readdirSync, readFileSync } from 'fs'
+import { extname, join } from 'path'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
-//todo: механизм заполнения бд
-const userData: Prisma.UserCreateInput[] = [{
-    username: 'admin',
-    sirName: '',
-    lastName: '',
-    firstName: '',
-    agreement: new Date(1990, 1, 1),
-    avatar: '',
-    birthday: new Date(1990, 1, 1),
-    createdAt: new Date(1990, 1, 1),
-    email: 'admin@admin.ru',
-    lastLogin: new Date(1990, 1, 1)
-}]
+
 async function main() {
   console.log(`Start seeding ...`)
-  for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
-    })
-    console.log(`Created user with id: ${user.id}`)
+  const path = __dirname
+  const jsonsInDir = readdirSync(path).filter(file => extname(file) === '.json')
+  for (const file of jsonsInDir) {
+    console.log(`Seeding ${file}`)
+    const fileData = readFileSync(join(path, file))
+    const json = JSON.parse(fileData.toString())
+    const table = file.split('.')[1]
+    prisma.user.createMany()
+    await prisma[table].createMany({ data: json })
   }
   console.log(`Seeding finished.`)
 }
 
 main()
-  .catch((e) => {
+  .catch(e => {
     console.error(e)
     process.exit(1)
   })

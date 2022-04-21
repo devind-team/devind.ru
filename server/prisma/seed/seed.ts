@@ -13,7 +13,6 @@ async function main() {
     const fileData = readFileSync(join(path, file))
     const json = JSON.parse(fileData.toString())
     const table = file.split('.')[1]
-    prisma.user.createMany()
     await prisma[table].createMany({ data: json })
   }
   console.log(`Seeding finished.`)

@@ -8,10 +8,17 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../src/@generated/prisma-nestjs-graphql"
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   groups    Group[]
   username  String
+  /// @HideField()
+  password  String   @default("")
   lastLogin DateTime
   email     String   @unique
   firstName String

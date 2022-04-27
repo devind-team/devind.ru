@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Post {
+  id: ID!
+  name: String!
+  author: User!
+  userId: Int!
+}
+
 type GroupCount {
   users: Int!
 }
@@ -14,22 +21,26 @@ type Group {
 }
 
 type UserCount {
+  posts: Int!
   groups: Int!
 }
 
 type User {
   id: ID!
-  groups: [Group!]
+
+  """User's name"""
   username: String!
-  lastLogin: DateTime!
+  lastLogin: DateTime
   email: String!
   firstName: String!
   lastName: String!
   sirName: String!
   avatar: String!
   birthday: DateTime!
-  agreement: DateTime!
+  agreement: DateTime
   createdAt: DateTime!
+  posts: [Post!]
+  groups: [Group!]
   _count: UserCount!
 }
 
@@ -39,7 +50,19 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  users(where: UserWhereInput): [User!]!
+  users(input: InputUser): [User!]!
+}
+
+input InputUser {
+  first: Int
+  skip: Int
+  after: UserWhereUniqueInput
+  where: UserWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  email: String
 }
 
 input UserWhereInput {
@@ -47,18 +70,16 @@ input UserWhereInput {
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
   id: IntFilter
-  groups: GroupListRelationFilter
   username: StringFilter
   password: StringFilter
-  lastLogin: DateTimeFilter
   email: StringFilter
   firstName: StringFilter
   lastName: StringFilter
   sirName: StringFilter
   avatar: StringFilter
   birthday: DateTimeFilter
-  agreement: DateTimeFilter
-  createdAt: DateTimeFilter
+  posts: PostListRelationFilter
+  groups: GroupListRelationFilter
 }
 
 input IntFilter {
@@ -81,21 +102,6 @@ input NestedIntFilter {
   gt: Int
   gte: Int
   not: NestedIntFilter
-}
-
-input GroupListRelationFilter {
-  every: GroupWhereInput
-  some: GroupWhereInput
-  none: GroupWhereInput
-}
-
-input GroupWhereInput {
-  AND: [GroupWhereInput!]
-  OR: [GroupWhereInput!]
-  NOT: [GroupWhereInput!]
-  id: IntFilter
-  name: StringFilter
-  users: UserListRelationFilter
 }
 
 input StringFilter {
@@ -132,12 +138,6 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input UserListRelationFilter {
-  every: UserWhereInput
-  some: UserWhereInput
-  none: UserWhereInput
-}
-
 input DateTimeFilter {
   equals: DateTime
   in: [DateTime!]
@@ -158,4 +158,112 @@ input NestedDateTimeFilter {
   gt: DateTime
   gte: DateTime
   not: NestedDateTimeFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  some: PostWhereInput
+  none: PostWhereInput
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  author: UserRelationFilter
+  userId: IntFilter
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input GroupListRelationFilter {
+  every: GroupWhereInput
+  some: GroupWhereInput
+  none: GroupWhereInput
+}
+
+input GroupWhereInput {
+  AND: [GroupWhereInput!]
+  OR: [GroupWhereInput!]
+  NOT: [GroupWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  users: UserListRelationFilter
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+}
+
+input UserCreateInput {
+  username: String!
+  password: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  sirName: String!
+  avatar: String!
+  birthday: DateTime!
+  posts: PostCreateNestedManyWithoutAuthorInput
+  groups: GroupCreateNestedManyWithoutUsersInput
+}
+
+input PostCreateNestedManyWithoutAuthorInput {
+  create: [PostCreateWithoutAuthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateWithoutAuthorInput {
+  name: String!
+}
+
+input PostCreateOrConnectWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  create: PostCreateWithoutAuthorInput!
+}
+
+input PostWhereUniqueInput {
+  id: Int
+}
+
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyAuthorInput {
+  id: Int
+  name: String!
+}
+
+input GroupCreateNestedManyWithoutUsersInput {
+  create: [GroupCreateWithoutUsersInput!]
+  connectOrCreate: [GroupCreateOrConnectWithoutUsersInput!]
+  connect: [GroupWhereUniqueInput!]
+}
+
+input GroupCreateWithoutUsersInput {
+  name: String!
+}
+
+input GroupCreateOrConnectWithoutUsersInput {
+  where: GroupWhereUniqueInput!
+  create: GroupCreateWithoutUsersInput!
+}
+
+input GroupWhereUniqueInput {
+  id: Int
 }

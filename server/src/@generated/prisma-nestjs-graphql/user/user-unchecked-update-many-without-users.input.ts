@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql'
 import { InputType } from '@nestjs/graphql'
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input'
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input'
+import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input'
+import { HideField } from '@nestjs/graphql'
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input'
 
 @InputType()
@@ -15,8 +17,8 @@ export class UserUncheckedUpdateManyWithoutUsersInput {
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: StringFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  lastLogin?: DateTimeFieldUpdateOperationsInput
+  @HideField()
+  lastLogin?: NullableDateTimeFieldUpdateOperationsInput
 
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   email?: StringFieldUpdateOperationsInput
@@ -36,9 +38,9 @@ export class UserUncheckedUpdateManyWithoutUsersInput {
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   birthday?: DateTimeFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  agreement?: DateTimeFieldUpdateOperationsInput
+  @HideField()
+  agreement?: NullableDateTimeFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   createdAt?: DateTimeFieldUpdateOperationsInput
 }

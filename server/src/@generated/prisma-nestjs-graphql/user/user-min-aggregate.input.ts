@@ -1,5 +1,6 @@
 import { Field } from '@nestjs/graphql'
 import { InputType } from '@nestjs/graphql'
+import { HideField } from '@nestjs/graphql'
 
 @InputType()
 export class UserMinAggregateInput {
@@ -12,7 +13,7 @@ export class UserMinAggregateInput {
   @Field(() => Boolean, { nullable: true })
   password?: true
 
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   lastLogin?: true
 
   @Field(() => Boolean, { nullable: true })
@@ -33,9 +34,9 @@ export class UserMinAggregateInput {
   @Field(() => Boolean, { nullable: true })
   birthday?: true
 
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   agreement?: true
 
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   createdAt?: true
 }

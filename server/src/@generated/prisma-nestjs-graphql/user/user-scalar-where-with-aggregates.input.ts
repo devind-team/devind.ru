@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql'
 import { InputType } from '@nestjs/graphql'
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input'
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input'
+import { DateTimeNullableWithAggregatesFilter } from '../prisma/date-time-nullable-with-aggregates-filter.input'
+import { HideField } from '@nestjs/graphql'
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input'
 
 @InputType()
@@ -24,8 +26,8 @@ export class UserScalarWhereWithAggregatesInput {
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   password?: StringWithAggregatesFilter
 
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  lastLogin?: DateTimeWithAggregatesFilter
+  @HideField()
+  lastLogin?: DateTimeNullableWithAggregatesFilter
 
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   email?: StringWithAggregatesFilter
@@ -45,9 +47,9 @@ export class UserScalarWhereWithAggregatesInput {
   @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
   birthday?: DateTimeWithAggregatesFilter
 
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  agreement?: DateTimeWithAggregatesFilter
+  @HideField()
+  agreement?: DateTimeNullableWithAggregatesFilter
 
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  @HideField()
   createdAt?: DateTimeWithAggregatesFilter
 }

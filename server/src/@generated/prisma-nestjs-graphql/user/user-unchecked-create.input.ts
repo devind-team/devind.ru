@@ -1,6 +1,9 @@
 import { Field } from '@nestjs/graphql'
 import { InputType } from '@nestjs/graphql'
 import { Int } from '@nestjs/graphql'
+import * as Validator from 'class-validator'
+import { HideField } from '@nestjs/graphql'
+import { PostUncheckedCreateNestedManyWithoutAuthorInput } from '../post/post-unchecked-create-nested-many-without-author.input'
 import { GroupUncheckedCreateNestedManyWithoutUsersInput } from '../group/group-unchecked-create-nested-many-without-users.input'
 
 @InputType()
@@ -8,21 +11,19 @@ export class UserUncheckedCreateInput {
   @Field(() => Int, { nullable: true })
   id?: number
 
-  @Field(() => GroupUncheckedCreateNestedManyWithoutUsersInput, {
-    nullable: true
-  })
-  groups?: GroupUncheckedCreateNestedManyWithoutUsersInput
-
   @Field(() => String, { nullable: false })
+  @Validator.MinLength(3)
+  @Validator.MaxLength(50)
   username!: string
 
   @Field(() => String, { nullable: true })
   password?: string
 
-  @Field(() => Date, { nullable: false })
-  lastLogin!: Date | string
+  @HideField()
+  lastLogin?: Date | string
 
   @Field(() => String, { nullable: false })
+  @Validator.IsEmail()
   email!: string
 
   @Field(() => String, { nullable: false })
@@ -40,9 +41,19 @@ export class UserUncheckedCreateInput {
   @Field(() => Date, { nullable: false })
   birthday!: Date | string
 
-  @Field(() => Date, { nullable: false })
-  agreement!: Date | string
+  @HideField()
+  agreement?: Date | string
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date | string
+  @HideField()
+  createdAt?: Date | string
+
+  @Field(() => PostUncheckedCreateNestedManyWithoutAuthorInput, {
+    nullable: true
+  })
+  posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+
+  @Field(() => GroupUncheckedCreateNestedManyWithoutUsersInput, {
+    nullable: true
+  })
+  groups?: GroupUncheckedCreateNestedManyWithoutUsersInput
 }

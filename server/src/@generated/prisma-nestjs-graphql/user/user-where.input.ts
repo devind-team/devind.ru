@@ -1,9 +1,12 @@
 import { Field } from '@nestjs/graphql'
 import { InputType } from '@nestjs/graphql'
 import { IntFilter } from '../prisma/int-filter.input'
-import { GroupListRelationFilter } from '../group/group-list-relation-filter.input'
 import { StringFilter } from '../prisma/string-filter.input'
+import { DateTimeNullableFilter } from '../prisma/date-time-nullable-filter.input'
+import { HideField } from '@nestjs/graphql'
 import { DateTimeFilter } from '../prisma/date-time-filter.input'
+import { PostListRelationFilter } from '../post/post-list-relation-filter.input'
+import { GroupListRelationFilter } from '../group/group-list-relation-filter.input'
 
 @InputType()
 export class UserWhereInput {
@@ -19,17 +22,14 @@ export class UserWhereInput {
   @Field(() => IntFilter, { nullable: true })
   id?: IntFilter
 
-  @Field(() => GroupListRelationFilter, { nullable: true })
-  groups?: GroupListRelationFilter
-
   @Field(() => StringFilter, { nullable: true })
   username?: StringFilter
 
   @Field(() => StringFilter, { nullable: true })
   password?: StringFilter
 
-  @Field(() => DateTimeFilter, { nullable: true })
-  lastLogin?: DateTimeFilter
+  @HideField()
+  lastLogin?: DateTimeNullableFilter
 
   @Field(() => StringFilter, { nullable: true })
   email?: StringFilter
@@ -49,9 +49,15 @@ export class UserWhereInput {
   @Field(() => DateTimeFilter, { nullable: true })
   birthday?: DateTimeFilter
 
-  @Field(() => DateTimeFilter, { nullable: true })
-  agreement?: DateTimeFilter
+  @HideField()
+  agreement?: DateTimeNullableFilter
 
-  @Field(() => DateTimeFilter, { nullable: true })
+  @HideField()
   createdAt?: DateTimeFilter
+
+  @Field(() => PostListRelationFilter, { nullable: true })
+  posts?: PostListRelationFilter
+
+  @Field(() => GroupListRelationFilter, { nullable: true })
+  groups?: GroupListRelationFilter
 }

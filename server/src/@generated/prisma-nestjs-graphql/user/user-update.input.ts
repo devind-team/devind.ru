@@ -1,22 +1,22 @@
 import { Field } from '@nestjs/graphql'
 import { InputType } from '@nestjs/graphql'
-import { GroupUpdateManyWithoutUsersInput } from '../group/group-update-many-without-users.input'
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input'
+import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input'
+import { HideField } from '@nestjs/graphql'
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input'
+import { PostUpdateManyWithoutAuthorInput } from '../post/post-update-many-without-author.input'
+import { GroupUpdateManyWithoutUsersInput } from '../group/group-update-many-without-users.input'
 
 @InputType()
 export class UserUpdateInput {
-  @Field(() => GroupUpdateManyWithoutUsersInput, { nullable: true })
-  groups?: GroupUpdateManyWithoutUsersInput
-
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   username?: StringFieldUpdateOperationsInput
 
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   password?: StringFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  lastLogin?: DateTimeFieldUpdateOperationsInput
+  @HideField()
+  lastLogin?: NullableDateTimeFieldUpdateOperationsInput
 
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   email?: StringFieldUpdateOperationsInput
@@ -36,9 +36,15 @@ export class UserUpdateInput {
   @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
   birthday?: DateTimeFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  agreement?: DateTimeFieldUpdateOperationsInput
+  @HideField()
+  agreement?: NullableDateTimeFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   createdAt?: DateTimeFieldUpdateOperationsInput
+
+  @Field(() => PostUpdateManyWithoutAuthorInput, { nullable: true })
+  posts?: PostUpdateManyWithoutAuthorInput
+
+  @Field(() => GroupUpdateManyWithoutUsersInput, { nullable: true })
+  groups?: GroupUpdateManyWithoutUsersInput
 }

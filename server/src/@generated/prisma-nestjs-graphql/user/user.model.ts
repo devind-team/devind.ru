@@ -1,8 +1,9 @@
 import { Field } from '@nestjs/graphql'
 import { ObjectType } from '@nestjs/graphql'
 import { ID } from '@nestjs/graphql'
-import { Group } from '../group/group.model'
 import { HideField } from '@nestjs/graphql'
+import { Post } from '../post/post.model'
+import { Group } from '../group/group.model'
 import { UserCount } from './user-count.output'
 
 @ObjectType()
@@ -10,17 +11,15 @@ export class User {
   @Field(() => ID, { nullable: false })
   id!: number
 
-  @Field(() => [Group], { nullable: true })
-  groups?: Array<Group>
-
-  @Field(() => String, { nullable: false })
+  /** User's name */
+  @Field(() => String, { nullable: false, description: "User's name" })
   username!: string
 
   @HideField()
   password!: string
 
-  @Field(() => Date, { nullable: false })
-  lastLogin!: Date
+  @Field(() => Date, { nullable: true })
+  lastLogin!: Date | null
 
   @Field(() => String, { nullable: false })
   email!: string
@@ -40,11 +39,17 @@ export class User {
   @Field(() => Date, { nullable: false })
   birthday!: Date
 
-  @Field(() => Date, { nullable: false })
-  agreement!: Date
+  @Field(() => Date, { nullable: true })
+  agreement!: Date | null
 
   @Field(() => Date, { nullable: false })
   createdAt!: Date
+
+  @Field(() => [Post], { nullable: true })
+  posts?: Array<Post>
+
+  @Field(() => [Group], { nullable: true })
+  groups?: Array<Group>
 
   @Field(() => UserCount, { nullable: false })
   _count?: UserCount

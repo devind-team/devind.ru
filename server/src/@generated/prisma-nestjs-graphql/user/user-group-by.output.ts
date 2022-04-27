@@ -19,8 +19,8 @@ export class UserGroupBy {
   @HideField()
   password!: string
 
-  @Field(() => Date, { nullable: false })
-  lastLogin!: Date | string
+  @Field(() => Date, { nullable: true })
+  lastLogin?: Date | string
 
   @Field(() => String, { nullable: false })
   email!: string
@@ -40,8 +40,8 @@ export class UserGroupBy {
   @Field(() => Date, { nullable: false })
   birthday!: Date | string
 
-  @Field(() => Date, { nullable: false })
-  agreement!: Date | string
+  @Field(() => Date, { nullable: true })
+  agreement?: Date | string
 
   @Field(() => Date, { nullable: false })
   createdAt!: Date | string

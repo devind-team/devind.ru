@@ -8,7 +8,7 @@ import {
   InputType,
   Field
 } from '@nestjs/graphql'
-import { validate, Length } from 'class-validator'
+import { validate } from 'class-validator'
 import { PrismaSelect } from '@paljs/plugins'
 import { GraphQLResolveInfo } from 'graphql'
 import { UserWhereInput } from 'src/@generated/prisma-nestjs-graphql/user/user-where.input'
@@ -17,30 +17,14 @@ import { PrismaService } from 'src/prisma.service'
 import { UserWhereUniqueInput } from '../@generated/prisma-nestjs-graphql/user/user-where-unique.input'
 import { Type } from '@nestjs/common'
 import { CreateOneUserArgs } from '../@generated/prisma-nestjs-graphql/user/create-one-user.args'
-import { UserCreateInput } from '../@generated/prisma-nestjs-graphql/user/user-create.input'
-import { plainToClass, plainToInstance } from 'class-transformer'
-
-export function QueryInput<TWhere, TUnique>(
-  whereRef: Type<TWhere>,
-  whereUnique: Type<TUnique>
-): any {
-  @InputType(`${whereRef.name}Input`)
-  abstract class Input {
-    @Field(() => Int, { nullable: true })
-    first?: number
-    @Field(() => Int, { nullable: true })
-    skip?: number
-    @Field(() => whereUnique, { nullable: true })
-    after?: TUnique
-    @Field(() => whereRef, { nullable: true })
-    where?: TWhere
-  }
-  return Input
-}
+import { UpdateOneUserArgs } from '../@generated/prisma-nestjs-graphql/user/update-one-user.args'
+import { plainToInstance } from 'class-transformer'
+import { QueryInput } from 'src/utils/helpers'
 
 @InputType()
 class InputUser extends QueryInput(UserWhereInput, UserWhereUniqueInput) {}
 
+//todo: Генерация резолвера?
 @Resolver(() => User)
 export class UserResolver {
   constructor(private prisma: PrismaService) {}
@@ -66,11 +50,25 @@ export class UserResolver {
   @Mutation(() => User)
   async createUser(@Args() data: CreateOneUserArgs) {
     const d = plainToInstance(CreateOneUserArgs, data)
-    const v = await validate(d)
+    const v = await validate(d, {
+      skipMissingProperties: true
+    })
     if (v.length > 0) {
-      throw v[0].children[0].constraints //todo error handling
+      throw v
     }
     const res = await this.prisma.user.create(data)
     return res
+  }
+
+  @Mutation(() => User)
+  async changeUser(@Args() data: UpdateOneUserArgs) {
+    const d = plainToInstance(UpdateOneUserArgs, data)
+    const v = await validate(d, {
+      skipMissingProperties: true
+    })
+    if (v.length > 0) {
+      throw v
+    }
+    return await this.prisma.user.update(data)
   }
 }

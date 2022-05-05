@@ -12,12 +12,12 @@ generator nestgraphql {
   output   = "../src/@generated/prisma-nestjs-graphql"
   fields_Validator_from = "class-validator"
   fields_Validator_input = true
-  decorate_1_type = "Create@(One|Many)UserArgs"
+  decorate_1_type = "@(Create|Update)@(One|Many)UserArgs"
   decorate_1_field = data
   decorate_1_name = ValidateNested
   decorate_1_from = "class-validator"
   decorate_1_arguments = "[]"
-  decorate_2_type = "Create@(One|Many)UserArgs"
+  decorate_2_type = "@(Create|Update)@(One|Many)UserArgs"
   decorate_2_field = data
   decorate_2_from = "class-transformer"
   decorate_2_arguments = "['() => {propertyType.0}']"

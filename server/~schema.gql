@@ -204,6 +204,7 @@ input UserListRelationFilter {
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  changeUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
 input UserCreateInput {
@@ -266,4 +267,117 @@ input GroupCreateOrConnectWithoutUsersInput {
 
 input GroupWhereUniqueInput {
   id: Int
+}
+
+input UserUpdateInput {
+  username: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+  sirName: StringFieldUpdateOperationsInput
+  avatar: StringFieldUpdateOperationsInput
+  birthday: DateTimeFieldUpdateOperationsInput
+  posts: PostUpdateManyWithoutAuthorInput
+  groups: GroupUpdateManyWithoutUsersInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input PostUpdateManyWithoutAuthorInput {
+  create: [PostCreateWithoutAuthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  set: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  connect: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
+  deleteMany: [PostScalarWhereInput!]
+}
+
+input PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutAuthorInput!
+  create: PostCreateWithoutAuthorInput!
+}
+
+input PostUpdateWithoutAuthorInput {
+  name: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutAuthorInput!
+}
+
+input PostUpdateManyWithWhereWithoutAuthorInput {
+  where: PostScalarWhereInput!
+  data: PostUpdateManyMutationInput!
+}
+
+input PostScalarWhereInput {
+  AND: [PostScalarWhereInput!]
+  OR: [PostScalarWhereInput!]
+  NOT: [PostScalarWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  userId: IntFilter
+}
+
+input PostUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
+}
+
+input GroupUpdateManyWithoutUsersInput {
+  create: [GroupCreateWithoutUsersInput!]
+  connectOrCreate: [GroupCreateOrConnectWithoutUsersInput!]
+  upsert: [GroupUpsertWithWhereUniqueWithoutUsersInput!]
+  set: [GroupWhereUniqueInput!]
+  disconnect: [GroupWhereUniqueInput!]
+  delete: [GroupWhereUniqueInput!]
+  connect: [GroupWhereUniqueInput!]
+  update: [GroupUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [GroupUpdateManyWithWhereWithoutUsersInput!]
+  deleteMany: [GroupScalarWhereInput!]
+}
+
+input GroupUpsertWithWhereUniqueWithoutUsersInput {
+  where: GroupWhereUniqueInput!
+  update: GroupUpdateWithoutUsersInput!
+  create: GroupCreateWithoutUsersInput!
+}
+
+input GroupUpdateWithoutUsersInput {
+  name: StringFieldUpdateOperationsInput
+}
+
+input GroupUpdateWithWhereUniqueWithoutUsersInput {
+  where: GroupWhereUniqueInput!
+  data: GroupUpdateWithoutUsersInput!
+}
+
+input GroupUpdateManyWithWhereWithoutUsersInput {
+  where: GroupScalarWhereInput!
+  data: GroupUpdateManyMutationInput!
+}
+
+input GroupScalarWhereInput {
+  AND: [GroupScalarWhereInput!]
+  OR: [GroupScalarWhereInput!]
+  NOT: [GroupScalarWhereInput!]
+  id: IntFilter
+  name: StringFilter
+}
+
+input GroupUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
 }

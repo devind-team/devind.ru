@@ -35,8 +35,8 @@ export class UserUncheckedUpdateManyInput {
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   avatar?: StringFieldUpdateOperationsInput
 
-  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
-  birthday?: DateTimeFieldUpdateOperationsInput
+  @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
+  birthday?: NullableDateTimeFieldUpdateOperationsInput
 
   @HideField()
   agreement?: NullableDateTimeFieldUpdateOperationsInput

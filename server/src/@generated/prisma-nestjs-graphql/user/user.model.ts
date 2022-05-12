@@ -30,14 +30,14 @@ export class User {
   @Field(() => String, { nullable: false })
   lastName!: string
 
-  @Field(() => String, { nullable: false })
+  @Field(() => String, { nullable: false, defaultValue: '' })
   sirName!: string
 
-  @Field(() => String, { nullable: false })
+  @Field(() => String, { nullable: false, defaultValue: '' })
   avatar!: string
 
-  @Field(() => Date, { nullable: false })
-  birthday!: Date
+  @Field(() => Date, { nullable: true })
+  birthday!: Date | null
 
   @Field(() => Date, { nullable: true })
   agreement!: Date | null

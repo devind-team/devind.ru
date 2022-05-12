@@ -37,8 +37,8 @@ export class UserGroupBy {
   @Field(() => String, { nullable: false })
   avatar!: string
 
-  @Field(() => Date, { nullable: false })
-  birthday!: Date | string
+  @Field(() => Date, { nullable: true })
+  birthday?: Date | string
 
   @Field(() => Date, { nullable: true })
   agreement?: Date | string

@@ -6,22 +6,22 @@ generator client {
 }
 
 generator nestgraphql {
-  provider = "node node_modules/prisma-nestjs-graphql"
+  provider               = "node node_modules/prisma-nestjs-graphql"
   // for yarn monorepos
   // provider = "prisma-nestjs-graphql"
-  output   = "../src/@generated/prisma-nestjs-graphql"
-  fields_Validator_from = "class-validator"
+  output                 = "../src/@generated/prisma-nestjs-graphql"
+  fields_Validator_from  = "class-validator"
   fields_Validator_input = true
-  decorate_1_type = "@(Create|Update)@(One|Many)UserArgs"
-  decorate_1_field = data
-  decorate_1_name = ValidateNested
-  decorate_1_from = "class-validator"
-  decorate_1_arguments = "[]"
-  decorate_2_type = "@(Create|Update)@(One|Many)UserArgs"
-  decorate_2_field = data
-  decorate_2_from = "class-transformer"
-  decorate_2_arguments = "['() => {propertyType.0}']"
-  decorate_2_name = Type
+  decorate_1_type        = "@(Create|Update)@(One|Many)UserArgs"
+  decorate_1_field       = data
+  decorate_1_name        = ValidateNested
+  decorate_1_from        = "class-validator"
+  decorate_1_arguments   = "[]"
+  decorate_2_type        = "@(Create|Update)@(One|Many)UserArgs"
+  decorate_2_field       = data
+  decorate_2_from        = "class-transformer"
+  decorate_2_arguments   = "['() => {propertyType.0}']"
+  decorate_2_name        = Type
   decorate_2_namedImport = true
 }
 
@@ -37,16 +37,16 @@ model User {
   /// @Validator.MaxLength(50)
   username  String
   /// @HideField()
-  password  String    @default("")
+  password  String
   /// @HideField({input: true})
   lastLogin DateTime?
   /// @Validator.IsEmail()
   email     String    @unique
   firstName String
   lastName  String
-  sirName   String
-  avatar    String
-  birthday  DateTime
+  sirName   String    @default("")
+  avatar    String    @default("")
+  birthday  DateTime?
   /// @HideField({input:true})
   agreement DateTime?
   /// @HideField({input:true})

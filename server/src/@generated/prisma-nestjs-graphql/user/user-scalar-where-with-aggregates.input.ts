@@ -44,8 +44,8 @@ export class UserScalarWhereWithAggregatesInput {
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   avatar?: StringWithAggregatesFilter
 
-  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
-  birthday?: DateTimeWithAggregatesFilter
+  @Field(() => DateTimeNullableWithAggregatesFilter, { nullable: true })
+  birthday?: DateTimeNullableWithAggregatesFilter
 
   @HideField()
   agreement?: DateTimeNullableWithAggregatesFilter

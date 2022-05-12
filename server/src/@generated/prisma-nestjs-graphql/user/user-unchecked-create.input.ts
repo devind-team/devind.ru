@@ -16,8 +16,8 @@ export class UserUncheckedCreateInput {
   @Validator.MaxLength(50)
   username!: string
 
-  @Field(() => String, { nullable: true })
-  password?: string
+  @Field(() => String, { nullable: false })
+  password!: string
 
   @HideField()
   lastLogin?: Date | string
@@ -32,14 +32,14 @@ export class UserUncheckedCreateInput {
   @Field(() => String, { nullable: false })
   lastName!: string
 
-  @Field(() => String, { nullable: false })
-  sirName!: string
+  @Field(() => String, { nullable: true })
+  sirName?: string
 
-  @Field(() => String, { nullable: false })
-  avatar!: string
+  @Field(() => String, { nullable: true })
+  avatar?: string
 
-  @Field(() => Date, { nullable: false })
-  birthday!: Date | string
+  @Field(() => Date, { nullable: true })
+  birthday?: Date | string
 
   @HideField()
   agreement?: Date | string

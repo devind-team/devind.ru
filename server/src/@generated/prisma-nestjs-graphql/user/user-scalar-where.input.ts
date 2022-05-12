@@ -44,8 +44,8 @@ export class UserScalarWhereInput {
   @Field(() => StringFilter, { nullable: true })
   avatar?: StringFilter
 
-  @Field(() => DateTimeFilter, { nullable: true })
-  birthday?: DateTimeFilter
+  @Field(() => DateTimeNullableFilter, { nullable: true })
+  birthday?: DateTimeNullableFilter
 
   @HideField()
   agreement?: DateTimeNullableFilter

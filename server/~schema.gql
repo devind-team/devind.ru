@@ -2,247 +2,181 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Post {
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+type Group {
+  _count: GroupCount!
   id: ID!
   name: String!
-  author: User!
-  userId: Int!
+  users: [User!]
 }
 
 type GroupCount {
   users: Int!
 }
 
-type Group {
-  id: ID!
+input GroupCreateNestedManyWithoutUsersInput {
+  connect: [GroupWhereUniqueInput!]
+  connectOrCreate: [GroupCreateOrConnectWithoutUsersInput!]
+  create: [GroupCreateWithoutUsersInput!]
+}
+
+input GroupCreateOrConnectWithoutUsersInput {
+  create: GroupCreateWithoutUsersInput!
+  where: GroupWhereUniqueInput!
+}
+
+input GroupCreateWithoutUsersInput {
   name: String!
-  users: [User!]
-  _count: GroupCount!
-}
-
-type UserCount {
-  posts: Int!
-  groups: Int!
-}
-
-type User {
-  id: ID!
-
-  """User's name"""
-  username: String!
-  lastLogin: DateTime
-  email: String!
-  firstName: String!
-  lastName: String!
-  sirName: String!
-  avatar: String!
-  birthday: DateTime!
-  agreement: DateTime
-  createdAt: DateTime!
-  posts: [Post!]
-  groups: [Group!]
-  _count: UserCount!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Query {
-  users(input: InputUser): [User!]!
-}
-
-input InputUser {
-  first: Int
-  skip: Int
-  after: UserWhereUniqueInput
-  where: UserWhereInput
-}
-
-input UserWhereUniqueInput {
-  id: Int
-  email: String
-}
-
-input UserWhereInput {
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
-  id: IntFilter
-  username: StringFilter
-  password: StringFilter
-  email: StringFilter
-  firstName: StringFilter
-  lastName: StringFilter
-  sirName: StringFilter
-  avatar: StringFilter
-  birthday: DateTimeFilter
-  posts: PostListRelationFilter
-  groups: GroupListRelationFilter
-}
-
-input IntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
-input NestedIntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
-input StringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: NestedStringFilter
-}
-
-enum QueryMode {
-  default
-  insensitive
-}
-
-input NestedStringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
-}
-
-input DateTimeFilter {
-  equals: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  gt: DateTime
-  gte: DateTime
-  not: NestedDateTimeFilter
-}
-
-input NestedDateTimeFilter {
-  equals: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  gt: DateTime
-  gte: DateTime
-  not: NestedDateTimeFilter
-}
-
-input PostListRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
-}
-
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
-  id: IntFilter
-  name: StringFilter
-  author: UserRelationFilter
-  userId: IntFilter
-}
-
-input UserRelationFilter {
-  is: UserWhereInput
-  isNot: UserWhereInput
 }
 
 input GroupListRelationFilter {
   every: GroupWhereInput
-  some: GroupWhereInput
   none: GroupWhereInput
+  some: GroupWhereInput
+}
+
+input GroupScalarWhereInput {
+  AND: [GroupScalarWhereInput!]
+  NOT: [GroupScalarWhereInput!]
+  OR: [GroupScalarWhereInput!]
+  id: IntFilter
+  name: StringFilter
+}
+
+input GroupUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
+}
+
+input GroupUpdateManyWithWhereWithoutUsersInput {
+  data: GroupUpdateManyMutationInput!
+  where: GroupScalarWhereInput!
+}
+
+input GroupUpdateManyWithoutUsersInput {
+  connect: [GroupWhereUniqueInput!]
+  connectOrCreate: [GroupCreateOrConnectWithoutUsersInput!]
+  create: [GroupCreateWithoutUsersInput!]
+  delete: [GroupWhereUniqueInput!]
+  deleteMany: [GroupScalarWhereInput!]
+  disconnect: [GroupWhereUniqueInput!]
+  set: [GroupWhereUniqueInput!]
+  update: [GroupUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [GroupUpdateManyWithWhereWithoutUsersInput!]
+  upsert: [GroupUpsertWithWhereUniqueWithoutUsersInput!]
+}
+
+input GroupUpdateWithWhereUniqueWithoutUsersInput {
+  data: GroupUpdateWithoutUsersInput!
+  where: GroupWhereUniqueInput!
+}
+
+input GroupUpdateWithoutUsersInput {
+  name: StringFieldUpdateOperationsInput
+}
+
+input GroupUpsertWithWhereUniqueWithoutUsersInput {
+  create: GroupCreateWithoutUsersInput!
+  update: GroupUpdateWithoutUsersInput!
+  where: GroupWhereUniqueInput!
 }
 
 input GroupWhereInput {
   AND: [GroupWhereInput!]
-  OR: [GroupWhereInput!]
   NOT: [GroupWhereInput!]
+  OR: [GroupWhereInput!]
   id: IntFilter
   name: StringFilter
   users: UserListRelationFilter
 }
 
-input UserListRelationFilter {
-  every: UserWhereInput
-  some: UserWhereInput
-  none: UserWhereInput
-}
-
-type Mutation {
-  createUser(data: UserCreateInput!): User!
-  changeUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
-}
-
-input UserCreateInput {
-  username: String!
-  password: String
-  email: String!
-  firstName: String!
-  lastName: String!
-  sirName: String!
-  avatar: String!
-  birthday: DateTime!
-  posts: PostCreateNestedManyWithoutAuthorInput
-  groups: GroupCreateNestedManyWithoutUsersInput
-}
-
-input PostCreateNestedManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
-  createMany: PostCreateManyAuthorInputEnvelope
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  name: String!
-}
-
-input PostCreateOrConnectWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  create: PostCreateWithoutAuthorInput!
-}
-
-input PostWhereUniqueInput {
+input GroupWhereUniqueInput {
   id: Int
 }
 
-input PostCreateManyAuthorInputEnvelope {
-  data: [PostCreateManyAuthorInput!]!
-  skipDuplicates: Boolean
+input InputUser {
+  after: UserWhereUniqueInput
+  first: Int
+  skip: Int
+  where: UserWhereInput
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+type Mutation {
+  changeUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  createUser(data: UserCreateInput!): User!
+  signIn(data: SignInInput!): TokenType!
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+type Post {
+  author: User!
+  id: ID!
+  name: String!
+  userId: Int!
 }
 
 input PostCreateManyAuthorInput {
@@ -250,84 +184,37 @@ input PostCreateManyAuthorInput {
   name: String!
 }
 
-input GroupCreateNestedManyWithoutUsersInput {
-  create: [GroupCreateWithoutUsersInput!]
-  connectOrCreate: [GroupCreateOrConnectWithoutUsersInput!]
-  connect: [GroupWhereUniqueInput!]
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
 }
 
-input GroupCreateWithoutUsersInput {
+input PostCreateNestedManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+}
+
+input PostCreateOrConnectWithoutAuthorInput {
+  create: PostCreateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateWithoutAuthorInput {
   name: String!
 }
 
-input GroupCreateOrConnectWithoutUsersInput {
-  where: GroupWhereUniqueInput!
-  create: GroupCreateWithoutUsersInput!
-}
-
-input GroupWhereUniqueInput {
-  id: Int
-}
-
-input UserUpdateInput {
-  username: StringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
-  sirName: StringFieldUpdateOperationsInput
-  avatar: StringFieldUpdateOperationsInput
-  birthday: DateTimeFieldUpdateOperationsInput
-  posts: PostUpdateManyWithoutAuthorInput
-  groups: GroupUpdateManyWithoutUsersInput
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-input DateTimeFieldUpdateOperationsInput {
-  set: DateTime
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-  createMany: PostCreateManyAuthorInputEnvelope
-  set: [PostWhereUniqueInput!]
-  disconnect: [PostWhereUniqueInput!]
-  delete: [PostWhereUniqueInput!]
-  connect: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
-  deleteMany: [PostScalarWhereInput!]
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  update: PostUpdateWithoutAuthorInput!
-  create: PostCreateWithoutAuthorInput!
-}
-
-input PostUpdateWithoutAuthorInput {
-  name: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  data: PostUpdateWithoutAuthorInput!
-}
-
-input PostUpdateManyWithWhereWithoutAuthorInput {
-  where: PostScalarWhereInput!
-  data: PostUpdateManyMutationInput!
+input PostListRelationFilter {
+  every: PostWhereInput
+  none: PostWhereInput
+  some: PostWhereInput
 }
 
 input PostScalarWhereInput {
   AND: [PostScalarWhereInput!]
-  OR: [PostScalarWhereInput!]
   NOT: [PostScalarWhereInput!]
+  OR: [PostScalarWhereInput!]
   id: IntFilter
   name: StringFilter
   userId: IntFilter
@@ -337,47 +224,174 @@ input PostUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input GroupUpdateManyWithoutUsersInput {
-  create: [GroupCreateWithoutUsersInput!]
-  connectOrCreate: [GroupCreateOrConnectWithoutUsersInput!]
-  upsert: [GroupUpsertWithWhereUniqueWithoutUsersInput!]
-  set: [GroupWhereUniqueInput!]
-  disconnect: [GroupWhereUniqueInput!]
-  delete: [GroupWhereUniqueInput!]
-  connect: [GroupWhereUniqueInput!]
-  update: [GroupUpdateWithWhereUniqueWithoutUsersInput!]
-  updateMany: [GroupUpdateManyWithWhereWithoutUsersInput!]
-  deleteMany: [GroupScalarWhereInput!]
+input PostUpdateManyWithWhereWithoutAuthorInput {
+  data: PostUpdateManyMutationInput!
+  where: PostScalarWhereInput!
 }
 
-input GroupUpsertWithWhereUniqueWithoutUsersInput {
-  where: GroupWhereUniqueInput!
-  update: GroupUpdateWithoutUsersInput!
-  create: GroupCreateWithoutUsersInput!
+input PostUpdateManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input GroupUpdateWithoutUsersInput {
+input PostUpdateWithWhereUniqueWithoutAuthorInput {
+  data: PostUpdateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpdateWithoutAuthorInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input GroupUpdateWithWhereUniqueWithoutUsersInput {
-  where: GroupWhereUniqueInput!
-  data: GroupUpdateWithoutUsersInput!
+input PostUpsertWithWhereUniqueWithoutAuthorInput {
+  create: PostCreateWithoutAuthorInput!
+  update: PostUpdateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
 }
 
-input GroupUpdateManyWithWhereWithoutUsersInput {
-  where: GroupScalarWhereInput!
-  data: GroupUpdateManyMutationInput!
-}
-
-input GroupScalarWhereInput {
-  AND: [GroupScalarWhereInput!]
-  OR: [GroupScalarWhereInput!]
-  NOT: [GroupScalarWhereInput!]
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  author: UserRelationFilter
   id: IntFilter
   name: StringFilter
+  userId: IntFilter
 }
 
-input GroupUpdateManyMutationInput {
-  name: StringFieldUpdateOperationsInput
+input PostWhereUniqueInput {
+  id: Int
+}
+
+type Query {
+  me: User!
+  users(input: InputUser): [User!]!
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type TokenType {
+  accessToken: String!
+  accessTokenExpiresAt: Int!
+  refreshToken: String!
+  refreshTokenExpiresAt: Int!
+}
+
+type User {
+  _count: UserCount!
+  agreement: DateTime
+  avatar: String!
+  birthday: DateTime
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  groups: [Group!]
+  id: ID!
+  lastLogin: DateTime
+  lastName: String!
+  posts: [Post!]
+  sirName: String!
+
+  """User's name"""
+  username: String!
+}
+
+type UserCount {
+  groups: Int!
+  posts: Int!
+}
+
+input UserCreateInput {
+  avatar: String
+  birthday: DateTime
+  email: String!
+  firstName: String!
+  groups: GroupCreateNestedManyWithoutUsersInput
+  lastName: String!
+  password: String!
+  posts: PostCreateNestedManyWithoutAuthorInput
+  sirName: String
+  username: String!
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  none: UserWhereInput
+  some: UserWhereInput
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input UserUpdateInput {
+  avatar: StringFieldUpdateOperationsInput
+  birthday: NullableDateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  groups: GroupUpdateManyWithoutUsersInput
+  lastName: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  posts: PostUpdateManyWithoutAuthorInput
+  sirName: StringFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  avatar: StringFilter
+  birthday: DateTimeNullableFilter
+  email: StringFilter
+  firstName: StringFilter
+  groups: GroupListRelationFilter
+  id: IntFilter
+  lastName: StringFilter
+  password: StringFilter
+  posts: PostListRelationFilter
+  sirName: StringFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
 }

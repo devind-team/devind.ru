@@ -163,6 +163,7 @@ input JsonFilter {
 type Mutation {
   changeUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
   createUser(data: UserCreateInput!): User!
+  fullLogOut: Boolean!
   refreshSession(data: RefreshSessionInput!): TokenType!
   signIn(data: SignInInput!): TokenType!
 }

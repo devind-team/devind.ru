@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt'
 import { randomBytes } from 'node:crypto'
 import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
 import { AuthRepository } from './session.repository'
+import { PassportUserFields } from './types'
 
 /**
  * Authentication service.
@@ -15,6 +16,20 @@ export class AuthService {
     private readonly appEnvironment: ConfigService,
     private readonly authRepository: AuthRepository
   ) {}
+
+  async revokeAllSessions(user: Partial<PassportUserFields>) {
+    await this.authRepository.updateManyTokens({
+      where: { session: { user } },
+      data: { revoked: true }
+    })
+  }
+
+  async revokeSession(refreshToken: string) {
+    await this.authRepository.updateToken({
+      where: { refresh: refreshToken },
+      data: { revoked: true }
+    })
+  }
 
   async refreshSession(refreshToken: string) {
     const token = await this.authRepository.findUniqueToken({

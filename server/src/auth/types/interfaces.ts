@@ -4,6 +4,6 @@ export interface AuthPayload {
 }
 
 export interface PassportUserFields {
-  id: string
+  id: number
   email: string
 }

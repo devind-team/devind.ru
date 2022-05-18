@@ -13,16 +13,13 @@ import { UserWhereInput } from 'src/@generated/prisma-nestjs-graphql/user/user-w
 import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
 import { PrismaService } from 'src/prisma.service'
 import { UserWhereUniqueInput } from '../@generated/prisma-nestjs-graphql/user/user-where-unique.input'
-import { UseGuards } from '@nestjs/common'
 import { CreateOneUserArgs } from '../@generated/prisma-nestjs-graphql/user/create-one-user.args'
 import { UpdateOneUserArgs } from '../@generated/prisma-nestjs-graphql/user/update-one-user.args'
 import { plainToInstance } from 'class-transformer'
 import { QueryInput } from 'src/utils/helpers'
 import { UserService } from './user.service'
-import { AuthService } from 'src/auth/auth.service'
-import { SessionService } from 'src/auth/session.service'
-import { UserRepository } from './user.repository'
-import { RefreshSessionArgs, SingInArgs, TokenType } from 'src/auth/types'
+import { SingInArgs, TokenType } from 'src/auth/types'
+import { UseGuards } from '@nestjs/common'
 import { GraphqlAuthGuard } from 'src/auth/guards'
 
 @InputType()
@@ -33,18 +30,13 @@ class InputUser extends QueryInput(UserWhereInput, UserWhereUniqueInput) {}
 export class UserResolver {
   constructor(
     private prisma: PrismaService,
-    private userService: UserService,
-    private authService: AuthService,
-    private sessionService: SessionService,
-    private userRepo: UserRepository
+    private userService: UserService
   ) {}
 
   @Query(() => User)
   @UseGuards(GraphqlAuthGuard)
   async me() {
-    const id = this.sessionService.currentUserId()
-    const user = await this.userRepo.findUnique({ where: { id } })
-    return user
+    return this.userService.me()
   }
 
   @Query(() => [User])
@@ -72,6 +64,13 @@ export class UserResolver {
       credentials.email,
       credentials.password
     )
+  }
+
+  @Mutation(() => Boolean)
+  @UseGuards(GraphqlAuthGuard)
+  async fullLogOut() {
+    await this.userService.fullLogOut()
+    return true
   }
 
   @Mutation(() => User)

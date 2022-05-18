@@ -22,7 +22,7 @@ import { UserService } from './user.service'
 import { AuthService } from 'src/auth/auth.service'
 import { SessionService } from 'src/auth/session.service'
 import { UserRepository } from './user.repository'
-import { SingInArgs, TokenType } from 'src/auth/types'
+import { RefreshSessionArgs, SingInArgs, TokenType } from 'src/auth/types'
 import { GraphqlAuthGuard } from 'src/auth/guards'
 
 @InputType()

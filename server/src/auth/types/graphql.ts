@@ -30,3 +30,15 @@ export class SingInArgs {
   @Type(() => SignInInput)
   data!: SignInInput
 }
+
+@InputType()
+export class RefreshSessionInput {
+  @Field(() => String, { nullable: false })
+  refreshToken!: string
+}
+@ArgsType()
+export class RefreshSessionArgs {
+  @Field(() => RefreshSessionInput, { nullable: false })
+  @Type(() => RefreshSessionInput)
+  data!: RefreshSessionInput
+}

@@ -44,7 +44,7 @@ export class UserService {
     const user = await this.repo.findUnique({ where: { email } })
     const cres = await bcrypt.compare(password, user.password)
     if (cres) {
-      return await this.authService.session(user)
+      return await this.authService.createSession(user)
     }
     return null
   }

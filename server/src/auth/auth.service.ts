@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { randomBytes } from 'node:crypto'
 import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
+import { AuthRepository } from './session.repository'
 
 /**
  * Authentication service.
@@ -11,13 +12,61 @@ import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly appEnvironment: ConfigService
+    private readonly appEnvironment: ConfigService,
+    private readonly authRepository: AuthRepository
   ) {}
+
+  async refreshSession(refreshToken: string) {
+    const token = await this.authRepository.findUniqueToken({
+      where: { refresh: refreshToken },
+      include: {
+        session: { select: { user: { select: { id: true, email: true } } } }
+      }
+    })
+    if (token.revoked) {
+      throw new UnauthorizedException(null, 'Revoked token')
+    }
+    const result = await this.generateToken({
+      id: token.session.user.id,
+      email: token.session.user.email
+    })
+    await this.authRepository.updateManyTokens({
+      data: { revoked: true },
+      where: { sessionId: token.sessionId }
+    })
+    await this.authRepository.createToken({
+      data: {
+        sessionId: token.sessionId,
+        jwt: result.accessToken,
+        refresh: result.refreshToken,
+        revoked: false
+      }
+    })
+    return result
+  }
 
   /**
    * Returns accessToken.
    */
-  async session(user: Pick<User, 'id' | 'email'>) {
+  async createSession(user: Pick<User, 'id' | 'email'>) {
+    const result = await this.generateToken(user)
+    await this.authRepository.createSession({
+      data: {
+        userId: user.id,
+        metadata: '',
+        tokens: {
+          create: {
+            jwt: result.accessToken,
+            refresh: result.refreshToken,
+            revoked: false
+          }
+        }
+      }
+    })
+    return result
+  }
+
+  private async generateToken(user: Pick<User, 'id' | 'email'>) {
     const date = new Date()
 
     const payload = {

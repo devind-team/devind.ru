@@ -2,10 +2,34 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
 
 input DateTimeNullableFilter {
   equals: DateTime
@@ -126,10 +150,37 @@ input IntFilter {
   notIn: [Int!]
 }
 
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input JsonFilter {
+  equals: JSON
+  not: JSON
+}
+
 type Mutation {
   changeUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
   createUser(data: UserCreateInput!): User!
+  refreshSession(data: RefreshSessionInput!): TokenType!
   signIn(data: SignInInput!): TokenType!
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
 }
 
 input NestedDateTimeNullableFilter {
@@ -282,6 +333,124 @@ enum QueryMode {
   insensitive
 }
 
+input RefreshSessionInput {
+  refreshToken: String!
+}
+
+type Session {
+  _count: SessionCount!
+  id: ID!
+  metadata: JSON!
+  tokens: [Token!]
+  user: User!
+  userId: Int!
+}
+
+type SessionCount {
+  tokens: Int!
+}
+
+input SessionCreateManyUserInput {
+  id: Int
+  metadata: JSON!
+}
+
+input SessionCreateManyUserInputEnvelope {
+  data: [SessionCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input SessionCreateNestedManyWithoutUserInput {
+  connect: [SessionWhereUniqueInput!]
+  connectOrCreate: [SessionCreateOrConnectWithoutUserInput!]
+  create: [SessionCreateWithoutUserInput!]
+  createMany: SessionCreateManyUserInputEnvelope
+}
+
+input SessionCreateOrConnectWithoutUserInput {
+  create: SessionCreateWithoutUserInput!
+  where: SessionWhereUniqueInput!
+}
+
+input SessionCreateWithoutUserInput {
+  metadata: JSON!
+  tokens: TokenCreateNestedManyWithoutSessionInput
+}
+
+input SessionListRelationFilter {
+  every: SessionWhereInput
+  none: SessionWhereInput
+  some: SessionWhereInput
+}
+
+input SessionRelationFilter {
+  is: SessionWhereInput
+  isNot: SessionWhereInput
+}
+
+input SessionScalarWhereInput {
+  AND: [SessionScalarWhereInput!]
+  NOT: [SessionScalarWhereInput!]
+  OR: [SessionScalarWhereInput!]
+  id: IntFilter
+  metadata: JsonFilter
+  userId: IntFilter
+}
+
+input SessionUpdateManyMutationInput {
+  metadata: JSON
+}
+
+input SessionUpdateManyWithWhereWithoutUserInput {
+  data: SessionUpdateManyMutationInput!
+  where: SessionScalarWhereInput!
+}
+
+input SessionUpdateManyWithoutUserInput {
+  connect: [SessionWhereUniqueInput!]
+  connectOrCreate: [SessionCreateOrConnectWithoutUserInput!]
+  create: [SessionCreateWithoutUserInput!]
+  createMany: SessionCreateManyUserInputEnvelope
+  delete: [SessionWhereUniqueInput!]
+  deleteMany: [SessionScalarWhereInput!]
+  disconnect: [SessionWhereUniqueInput!]
+  set: [SessionWhereUniqueInput!]
+  update: [SessionUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [SessionUpdateManyWithWhereWithoutUserInput!]
+  upsert: [SessionUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input SessionUpdateWithWhereUniqueWithoutUserInput {
+  data: SessionUpdateWithoutUserInput!
+  where: SessionWhereUniqueInput!
+}
+
+input SessionUpdateWithoutUserInput {
+  metadata: JSON
+  tokens: TokenUpdateManyWithoutSessionInput
+}
+
+input SessionUpsertWithWhereUniqueWithoutUserInput {
+  create: SessionCreateWithoutUserInput!
+  update: SessionUpdateWithoutUserInput!
+  where: SessionWhereUniqueInput!
+}
+
+input SessionWhereInput {
+  AND: [SessionWhereInput!]
+  NOT: [SessionWhereInput!]
+  OR: [SessionWhereInput!]
+  id: IntFilter
+  metadata: JsonFilter
+  tokens: TokenListRelationFilter
+  user: UserRelationFilter
+  userId: IntFilter
+}
+
+input SessionWhereUniqueInput {
+  id: Int
+}
+
 input SignInInput {
   email: String!
   password: String!
@@ -306,11 +475,141 @@ input StringFilter {
   startsWith: String
 }
 
+type Token {
+  createdAt: DateTime!
+  id: ID!
+  jwt: String!
+  refresh: String!
+  revoked: Boolean!
+  session: Session!
+  sessionId: Int!
+  updatedAt: DateTime!
+}
+
+input TokenCreateManySessionInput {
+  createdAt: DateTime
+  id: Int
+  jwt: String!
+  refresh: String!
+  revoked: Boolean!
+  updatedAt: DateTime
+}
+
+input TokenCreateManySessionInputEnvelope {
+  data: [TokenCreateManySessionInput!]!
+  skipDuplicates: Boolean
+}
+
+input TokenCreateNestedManyWithoutSessionInput {
+  connect: [TokenWhereUniqueInput!]
+  connectOrCreate: [TokenCreateOrConnectWithoutSessionInput!]
+  create: [TokenCreateWithoutSessionInput!]
+  createMany: TokenCreateManySessionInputEnvelope
+}
+
+input TokenCreateOrConnectWithoutSessionInput {
+  create: TokenCreateWithoutSessionInput!
+  where: TokenWhereUniqueInput!
+}
+
+input TokenCreateWithoutSessionInput {
+  createdAt: DateTime
+  jwt: String!
+  refresh: String!
+  revoked: Boolean!
+  updatedAt: DateTime
+}
+
+input TokenListRelationFilter {
+  every: TokenWhereInput
+  none: TokenWhereInput
+  some: TokenWhereInput
+}
+
+input TokenScalarWhereInput {
+  AND: [TokenScalarWhereInput!]
+  NOT: [TokenScalarWhereInput!]
+  OR: [TokenScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: IntFilter
+  jwt: StringFilter
+  refresh: StringFilter
+  revoked: BoolFilter
+  sessionId: IntFilter
+  updatedAt: DateTimeFilter
+}
+
 type TokenType {
   accessToken: String!
   accessTokenExpiresAt: Int!
   refreshToken: String!
   refreshTokenExpiresAt: Int!
+}
+
+input TokenUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  jwt: StringFieldUpdateOperationsInput
+  refresh: StringFieldUpdateOperationsInput
+  revoked: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TokenUpdateManyWithWhereWithoutSessionInput {
+  data: TokenUpdateManyMutationInput!
+  where: TokenScalarWhereInput!
+}
+
+input TokenUpdateManyWithoutSessionInput {
+  connect: [TokenWhereUniqueInput!]
+  connectOrCreate: [TokenCreateOrConnectWithoutSessionInput!]
+  create: [TokenCreateWithoutSessionInput!]
+  createMany: TokenCreateManySessionInputEnvelope
+  delete: [TokenWhereUniqueInput!]
+  deleteMany: [TokenScalarWhereInput!]
+  disconnect: [TokenWhereUniqueInput!]
+  set: [TokenWhereUniqueInput!]
+  update: [TokenUpdateWithWhereUniqueWithoutSessionInput!]
+  updateMany: [TokenUpdateManyWithWhereWithoutSessionInput!]
+  upsert: [TokenUpsertWithWhereUniqueWithoutSessionInput!]
+}
+
+input TokenUpdateWithWhereUniqueWithoutSessionInput {
+  data: TokenUpdateWithoutSessionInput!
+  where: TokenWhereUniqueInput!
+}
+
+input TokenUpdateWithoutSessionInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  jwt: StringFieldUpdateOperationsInput
+  refresh: StringFieldUpdateOperationsInput
+  revoked: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TokenUpsertWithWhereUniqueWithoutSessionInput {
+  create: TokenCreateWithoutSessionInput!
+  update: TokenUpdateWithoutSessionInput!
+  where: TokenWhereUniqueInput!
+}
+
+input TokenWhereInput {
+  AND: [TokenWhereInput!]
+  NOT: [TokenWhereInput!]
+  OR: [TokenWhereInput!]
+  createdAt: DateTimeFilter
+  id: IntFilter
+  jwt: StringFilter
+  refresh: StringFilter
+  revoked: BoolFilter
+  session: SessionRelationFilter
+  sessionId: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input TokenWhereUniqueInput {
+  id: Int
+  jwt: String
+  refresh: String
 }
 
 type User {
@@ -326,6 +625,7 @@ type User {
   lastLogin: DateTime
   lastName: String!
   posts: [Post!]
+  sessions: [Session!]
   sirName: String!
 
   """User's name"""
@@ -335,6 +635,7 @@ type User {
 type UserCount {
   groups: Int!
   posts: Int!
+  sessions: Int!
 }
 
 input UserCreateInput {
@@ -346,6 +647,7 @@ input UserCreateInput {
   lastName: String!
   password: String!
   posts: PostCreateNestedManyWithoutAuthorInput
+  sessions: SessionCreateNestedManyWithoutUserInput
   sirName: String
   username: String!
 }
@@ -370,6 +672,7 @@ input UserUpdateInput {
   lastName: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
   posts: PostUpdateManyWithoutAuthorInput
+  sessions: SessionUpdateManyWithoutUserInput
   sirName: StringFieldUpdateOperationsInput
   username: StringFieldUpdateOperationsInput
 }
@@ -387,6 +690,7 @@ input UserWhereInput {
   lastName: StringFilter
   password: StringFilter
   posts: PostListRelationFilter
+  sessions: SessionListRelationFilter
   sirName: StringFilter
   username: StringFilter
 }

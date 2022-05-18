@@ -1,63 +1,64 @@
-import { Field } from '@nestjs/graphql'
-import { ObjectType } from '@nestjs/graphql'
-import { Int } from '@nestjs/graphql'
-import { HideField } from '@nestjs/graphql'
-import { UserCountAggregate } from './user-count-aggregate.output'
-import { UserAvgAggregate } from './user-avg-aggregate.output'
-import { UserSumAggregate } from './user-sum-aggregate.output'
-import { UserMinAggregate } from './user-min-aggregate.output'
-import { UserMaxAggregate } from './user-max-aggregate.output'
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
+import { UserCountAggregate } from './user-count-aggregate.output';
+import { UserAvgAggregate } from './user-avg-aggregate.output';
+import { UserSumAggregate } from './user-sum-aggregate.output';
+import { UserMinAggregate } from './user-min-aggregate.output';
+import { UserMaxAggregate } from './user-max-aggregate.output';
 
 @ObjectType()
 export class UserGroupBy {
-  @Field(() => Int, { nullable: false })
-  id!: number
 
-  @Field(() => String, { nullable: false })
-  username!: string
+    @Field(() => Int, {nullable:false})
+    id!: number;
 
-  @HideField()
-  password!: string
+    @Field(() => String, {nullable:false})
+    username!: string;
 
-  @Field(() => Date, { nullable: true })
-  lastLogin?: Date | string
+    @HideField()
+    password!: string;
 
-  @Field(() => String, { nullable: false })
-  email!: string
+    @Field(() => Date, {nullable:true})
+    lastLogin?: Date | string;
 
-  @Field(() => String, { nullable: false })
-  firstName!: string
+    @Field(() => String, {nullable:false})
+    email!: string;
 
-  @Field(() => String, { nullable: false })
-  lastName!: string
+    @Field(() => String, {nullable:false})
+    firstName!: string;
 
-  @Field(() => String, { nullable: false })
-  sirName!: string
+    @Field(() => String, {nullable:false})
+    lastName!: string;
 
-  @Field(() => String, { nullable: false })
-  avatar!: string
+    @Field(() => String, {nullable:false})
+    sirName!: string;
 
-  @Field(() => Date, { nullable: true })
-  birthday?: Date | string
+    @Field(() => String, {nullable:false})
+    avatar!: string;
 
-  @Field(() => Date, { nullable: true })
-  agreement?: Date | string
+    @Field(() => Date, {nullable:true})
+    birthday?: Date | string;
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date | string
+    @Field(() => Date, {nullable:true})
+    agreement?: Date | string;
 
-  @Field(() => UserCountAggregate, { nullable: true })
-  _count?: UserCountAggregate
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
 
-  @Field(() => UserAvgAggregate, { nullable: true })
-  _avg?: UserAvgAggregate
+    @Field(() => UserCountAggregate, {nullable:true})
+    _count?: UserCountAggregate;
 
-  @Field(() => UserSumAggregate, { nullable: true })
-  _sum?: UserSumAggregate
+    @Field(() => UserAvgAggregate, {nullable:true})
+    _avg?: UserAvgAggregate;
 
-  @Field(() => UserMinAggregate, { nullable: true })
-  _min?: UserMinAggregate
+    @Field(() => UserSumAggregate, {nullable:true})
+    _sum?: UserSumAggregate;
 
-  @Field(() => UserMaxAggregate, { nullable: true })
-  _max?: UserMaxAggregate
+    @Field(() => UserMinAggregate, {nullable:true})
+    _min?: UserMinAggregate;
+
+    @Field(() => UserMaxAggregate, {nullable:true})
+    _max?: UserMaxAggregate;
 }

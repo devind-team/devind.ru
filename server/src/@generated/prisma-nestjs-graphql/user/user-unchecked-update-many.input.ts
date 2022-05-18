@@ -1,46 +1,47 @@
-import { Field } from '@nestjs/graphql'
-import { InputType } from '@nestjs/graphql'
-import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input'
-import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input'
-import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input'
-import { HideField } from '@nestjs/graphql'
-import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input'
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
+import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
+import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input';
+import { HideField } from '@nestjs/graphql';
+import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 
 @InputType()
 export class UserUncheckedUpdateManyInput {
-  @Field(() => IntFieldUpdateOperationsInput, { nullable: true })
-  id?: IntFieldUpdateOperationsInput
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  username?: StringFieldUpdateOperationsInput
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    id?: IntFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    username?: StringFieldUpdateOperationsInput;
 
-  @HideField()
-  lastLogin?: NullableDateTimeFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    password?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  email?: StringFieldUpdateOperationsInput
+    @HideField()
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  firstName?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  lastName?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    firstName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  sirName?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    lastName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  avatar?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    sirName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  birthday?: NullableDateTimeFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    avatar?: StringFieldUpdateOperationsInput;
 
-  @HideField()
-  agreement?: NullableDateTimeFieldUpdateOperationsInput
+    @Field(() => NullableDateTimeFieldUpdateOperationsInput, {nullable:true})
+    birthday?: NullableDateTimeFieldUpdateOperationsInput;
 
-  @HideField()
-  createdAt?: DateTimeFieldUpdateOperationsInput
+    @HideField()
+    agreement?: NullableDateTimeFieldUpdateOperationsInput;
+
+    @HideField()
+    createdAt?: DateTimeFieldUpdateOperationsInput;
 }

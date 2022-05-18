@@ -1,28 +1,29 @@
-import { Field } from '@nestjs/graphql'
-import { ArgsType } from '@nestjs/graphql'
-import { PostWhereInput } from './post-where.input'
-import { PostOrderByWithRelationInput } from './post-order-by-with-relation.input'
-import { PostWhereUniqueInput } from './post-where-unique.input'
-import { Int } from '@nestjs/graphql'
-import { PostScalarFieldEnum } from './post-scalar-field.enum'
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
+import { PostWhereInput } from './post-where.input';
+import { PostOrderByWithRelationInput } from './post-order-by-with-relation.input';
+import { PostWhereUniqueInput } from './post-where-unique.input';
+import { Int } from '@nestjs/graphql';
+import { PostScalarFieldEnum } from './post-scalar-field.enum';
 
 @ArgsType()
 export class FindManyPostArgs {
-  @Field(() => PostWhereInput, { nullable: true })
-  where?: PostWhereInput
 
-  @Field(() => [PostOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<PostOrderByWithRelationInput>
+    @Field(() => PostWhereInput, {nullable:true})
+    where?: PostWhereInput;
 
-  @Field(() => PostWhereUniqueInput, { nullable: true })
-  cursor?: PostWhereUniqueInput
+    @Field(() => [PostOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<PostOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number
+    @Field(() => PostWhereUniqueInput, {nullable:true})
+    cursor?: PostWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [PostScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof PostScalarFieldEnum>
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [PostScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof PostScalarFieldEnum>;
 }

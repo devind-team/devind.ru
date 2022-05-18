@@ -1,44 +1,45 @@
-import { Field } from '@nestjs/graphql'
-import { ArgsType } from '@nestjs/graphql'
-import { GroupWhereInput } from './group-where.input'
-import { GroupOrderByWithRelationInput } from './group-order-by-with-relation.input'
-import { GroupWhereUniqueInput } from './group-where-unique.input'
-import { Int } from '@nestjs/graphql'
-import { GroupCountAggregateInput } from './group-count-aggregate.input'
-import { GroupAvgAggregateInput } from './group-avg-aggregate.input'
-import { GroupSumAggregateInput } from './group-sum-aggregate.input'
-import { GroupMinAggregateInput } from './group-min-aggregate.input'
-import { GroupMaxAggregateInput } from './group-max-aggregate.input'
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
+import { GroupWhereInput } from './group-where.input';
+import { GroupOrderByWithRelationInput } from './group-order-by-with-relation.input';
+import { GroupWhereUniqueInput } from './group-where-unique.input';
+import { Int } from '@nestjs/graphql';
+import { GroupCountAggregateInput } from './group-count-aggregate.input';
+import { GroupAvgAggregateInput } from './group-avg-aggregate.input';
+import { GroupSumAggregateInput } from './group-sum-aggregate.input';
+import { GroupMinAggregateInput } from './group-min-aggregate.input';
+import { GroupMaxAggregateInput } from './group-max-aggregate.input';
 
 @ArgsType()
 export class GroupAggregateArgs {
-  @Field(() => GroupWhereInput, { nullable: true })
-  where?: GroupWhereInput
 
-  @Field(() => [GroupOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<GroupOrderByWithRelationInput>
+    @Field(() => GroupWhereInput, {nullable:true})
+    where?: GroupWhereInput;
 
-  @Field(() => GroupWhereUniqueInput, { nullable: true })
-  cursor?: GroupWhereUniqueInput
+    @Field(() => [GroupOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<GroupOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number
+    @Field(() => GroupWhereUniqueInput, {nullable:true})
+    cursor?: GroupWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => GroupCountAggregateInput, { nullable: true })
-  _count?: GroupCountAggregateInput
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => GroupAvgAggregateInput, { nullable: true })
-  _avg?: GroupAvgAggregateInput
+    @Field(() => GroupCountAggregateInput, {nullable:true})
+    _count?: GroupCountAggregateInput;
 
-  @Field(() => GroupSumAggregateInput, { nullable: true })
-  _sum?: GroupSumAggregateInput
+    @Field(() => GroupAvgAggregateInput, {nullable:true})
+    _avg?: GroupAvgAggregateInput;
 
-  @Field(() => GroupMinAggregateInput, { nullable: true })
-  _min?: GroupMinAggregateInput
+    @Field(() => GroupSumAggregateInput, {nullable:true})
+    _sum?: GroupSumAggregateInput;
 
-  @Field(() => GroupMaxAggregateInput, { nullable: true })
-  _max?: GroupMaxAggregateInput
+    @Field(() => GroupMinAggregateInput, {nullable:true})
+    _min?: GroupMinAggregateInput;
+
+    @Field(() => GroupMaxAggregateInput, {nullable:true})
+    _max?: GroupMaxAggregateInput;
 }

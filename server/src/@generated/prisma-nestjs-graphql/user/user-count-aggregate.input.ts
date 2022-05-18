@@ -1,45 +1,46 @@
-import { Field } from '@nestjs/graphql'
-import { InputType } from '@nestjs/graphql'
-import { HideField } from '@nestjs/graphql'
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserCountAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  id?: true
 
-  @Field(() => Boolean, { nullable: true })
-  username?: true
+    @Field(() => Boolean, {nullable:true})
+    id?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  password?: true
+    @Field(() => Boolean, {nullable:true})
+    username?: true;
 
-  @HideField()
-  lastLogin?: true
+    @Field(() => Boolean, {nullable:true})
+    password?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  email?: true
+    @HideField()
+    lastLogin?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  firstName?: true
+    @Field(() => Boolean, {nullable:true})
+    email?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  lastName?: true
+    @Field(() => Boolean, {nullable:true})
+    firstName?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  sirName?: true
+    @Field(() => Boolean, {nullable:true})
+    lastName?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  avatar?: true
+    @Field(() => Boolean, {nullable:true})
+    sirName?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  birthday?: true
+    @Field(() => Boolean, {nullable:true})
+    avatar?: true;
 
-  @HideField()
-  agreement?: true
+    @Field(() => Boolean, {nullable:true})
+    birthday?: true;
 
-  @HideField()
-  createdAt?: true
+    @HideField()
+    agreement?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  _all?: true
+    @HideField()
+    createdAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    _all?: true;
 }

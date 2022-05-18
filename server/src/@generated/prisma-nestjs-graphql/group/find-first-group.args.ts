@@ -1,28 +1,29 @@
-import { Field } from '@nestjs/graphql'
-import { ArgsType } from '@nestjs/graphql'
-import { GroupWhereInput } from './group-where.input'
-import { GroupOrderByWithRelationInput } from './group-order-by-with-relation.input'
-import { GroupWhereUniqueInput } from './group-where-unique.input'
-import { Int } from '@nestjs/graphql'
-import { GroupScalarFieldEnum } from './group-scalar-field.enum'
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
+import { GroupWhereInput } from './group-where.input';
+import { GroupOrderByWithRelationInput } from './group-order-by-with-relation.input';
+import { GroupWhereUniqueInput } from './group-where-unique.input';
+import { Int } from '@nestjs/graphql';
+import { GroupScalarFieldEnum } from './group-scalar-field.enum';
 
 @ArgsType()
 export class FindFirstGroupArgs {
-  @Field(() => GroupWhereInput, { nullable: true })
-  where?: GroupWhereInput
 
-  @Field(() => [GroupOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<GroupOrderByWithRelationInput>
+    @Field(() => GroupWhereInput, {nullable:true})
+    where?: GroupWhereInput;
 
-  @Field(() => GroupWhereUniqueInput, { nullable: true })
-  cursor?: GroupWhereUniqueInput
+    @Field(() => [GroupOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<GroupOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number
+    @Field(() => GroupWhereUniqueInput, {nullable:true})
+    cursor?: GroupWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [GroupScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof GroupScalarFieldEnum>
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [GroupScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof GroupScalarFieldEnum>;
 }

@@ -1,54 +1,59 @@
-import { Field } from '@nestjs/graphql'
-import { InputType } from '@nestjs/graphql'
-import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input'
-import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input'
-import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input'
-import { HideField } from '@nestjs/graphql'
-import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input'
-import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input'
-import { GroupUncheckedUpdateManyWithoutUsersInput } from '../group/group-unchecked-update-many-without-users.input'
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
+import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
+import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input';
+import { HideField } from '@nestjs/graphql';
+import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { PostUncheckedUpdateManyWithoutAuthorInput } from '../post/post-unchecked-update-many-without-author.input';
+import { GroupUncheckedUpdateManyWithoutUsersInput } from '../group/group-unchecked-update-many-without-users.input';
+import { SessionUncheckedUpdateManyWithoutUserInput } from '../session/session-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
-  @Field(() => IntFieldUpdateOperationsInput, { nullable: true })
-  id?: IntFieldUpdateOperationsInput
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  username?: StringFieldUpdateOperationsInput
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    id?: IntFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  password?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    username?: StringFieldUpdateOperationsInput;
 
-  @HideField()
-  lastLogin?: NullableDateTimeFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    password?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  email?: StringFieldUpdateOperationsInput
+    @HideField()
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  firstName?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  lastName?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    firstName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  sirName?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    lastName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  avatar?: StringFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    sirName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => NullableDateTimeFieldUpdateOperationsInput, { nullable: true })
-  birthday?: NullableDateTimeFieldUpdateOperationsInput
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    avatar?: StringFieldUpdateOperationsInput;
 
-  @HideField()
-  agreement?: NullableDateTimeFieldUpdateOperationsInput
+    @Field(() => NullableDateTimeFieldUpdateOperationsInput, {nullable:true})
+    birthday?: NullableDateTimeFieldUpdateOperationsInput;
 
-  @HideField()
-  createdAt?: DateTimeFieldUpdateOperationsInput
+    @HideField()
+    agreement?: NullableDateTimeFieldUpdateOperationsInput;
 
-  @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, { nullable: true })
-  posts?: PostUncheckedUpdateManyWithoutAuthorInput
+    @HideField()
+    createdAt?: DateTimeFieldUpdateOperationsInput;
 
-  @Field(() => GroupUncheckedUpdateManyWithoutUsersInput, { nullable: true })
-  groups?: GroupUncheckedUpdateManyWithoutUsersInput
+    @Field(() => PostUncheckedUpdateManyWithoutAuthorInput, {nullable:true})
+    posts?: PostUncheckedUpdateManyWithoutAuthorInput;
+
+    @Field(() => GroupUncheckedUpdateManyWithoutUsersInput, {nullable:true})
+    groups?: GroupUncheckedUpdateManyWithoutUsersInput;
+
+    @Field(() => SessionUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    sessions?: SessionUncheckedUpdateManyWithoutUserInput;
 }
